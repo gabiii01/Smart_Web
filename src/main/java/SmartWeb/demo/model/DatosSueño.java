@@ -1,27 +1,43 @@
 package SmartWeb.demo.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
-import java.util.Arrays;
-
+@Entity
+@Table(name = "datos_sueno")
 public class DatosSueño {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private float duracionSueño;
-    private float [] temperatura;
-    private float [] ruido;
-    private float [] oxigenacion;
 
+    @ElementCollection
+    private List<Float> temperatura;
 
-    public DatosSueño(){
-    }
+    @ElementCollection
+    private List<Float> ruido;
 
-    public DatosSueño(int id, float duracionSueño, float[] temperatura, float[] ruido, float[] oxigenacion) {
+    @ElementCollection
+    private List<Float> oxigenacion;
+
+    public DatosSueño() {}
+
+    public DatosSueño(Long id, float duracionSueño, List<Float> temperatura, List<Float> ruido, List<Float> oxigenacion) {
         this.id = id;
         this.duracionSueño = duracionSueño;
         this.temperatura = temperatura;
         this.ruido = ruido;
         this.oxigenacion = oxigenacion;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public float getDuracionSueño() {
@@ -32,46 +48,27 @@ public class DatosSueño {
         this.duracionSueño = duracionSueño;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public float[] getTemperatura() {
+    public List<Float> getTemperatura() {
         return temperatura;
     }
 
-    public void setTemperatura(float[] temperatura) {
+    public void setTemperatura(List<Float> temperatura) {
         this.temperatura = temperatura;
     }
 
-    public float[] getRuido() {
+    public List<Float> getRuido() {
         return ruido;
     }
 
-    public void setRuido(float[] ruido) {
+    public void setRuido(List<Float> ruido) {
         this.ruido = ruido;
     }
 
-    public float[] getOxigenacion() {
+    public List<Float> getOxigenacion() {
         return oxigenacion;
     }
 
-    public void setOxigenacion(float[] oxigenacion) {
+    public void setOxigenacion(List<Float> oxigenacion) {
         this.oxigenacion = oxigenacion;
-    }
-
-    @Override
-    public String toString() {
-        return "DatosSueño{" +
-                "id=" + id +
-                ", duracionSueño=" + duracionSueño +
-                ", temperatura=" + Arrays.toString(temperatura) +
-                ", ruido=" + Arrays.toString(ruido) +
-                ", oxigenacion=" + Arrays.toString(oxigenacion) +
-                '}';
     }
 }
