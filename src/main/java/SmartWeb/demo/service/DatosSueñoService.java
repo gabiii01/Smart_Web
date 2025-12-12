@@ -17,22 +17,22 @@ public class DatosSueñoService {
     }
 
     // Obtener todos los registros
-    public List<DatosSueño> findAll() {
+    public List<DatosSueño> EncontrarDatoSueño() {
         return datosSueñoRepositorio.findAll();
     }
 
     // Buscar uno por ID
-    public Optional<DatosSueño> findById(Long id) {
+    public Optional<DatosSueño> EncontrarporID(Long id) {
         return datosSueñoRepositorio.findById(id);
     }
 
     // Crear o actualizar
-    public DatosSueño save(DatosSueño datosSueño) {
+    public DatosSueño GuardarRegistroDatoSueño(DatosSueño datosSueño) {
         return datosSueñoRepositorio.save(datosSueño);
     }
 
     // Borrar un registro por ID
-    public void deleteById(Long id) {
+    public void BorrarporID(Long id) {
         datosSueñoRepositorio.deleteById(id);
     }
 }

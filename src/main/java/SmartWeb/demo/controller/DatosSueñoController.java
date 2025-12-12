@@ -18,28 +18,28 @@ public class DatosSueñoController {
     }
 
     @GetMapping
-    public List<DatosSueño> getAll() {
-        return datosSueñoService.findAll();
+    public List<DatosSueño> EncontrarDatoSueño() {
+        return datosSueñoService.EncontrarDatoSueño();
     }
 
     @GetMapping("/{id}")
-    public DatosSueño getById(@PathVariable Long id) {
-        return datosSueñoService.findById(id).orElse(null);
+    public DatosSueño EncontrarporID(@PathVariable Long id) {
+        return datosSueñoService.EncontrarporID(id).orElse(null);
     }
 
     @PostMapping
-    public DatosSueño create(@RequestBody DatosSueño datos) {
-        return datosSueñoService.save(datos);
+    public DatosSueño crearDataSueno(@RequestBody DatosSueño datos) {
+        return datosSueñoService.GuardarRegistroDatoSueño(datos);
     }
 
     @PutMapping("/{id}")
-    public DatosSueño update(@PathVariable Long id, @RequestBody DatosSueño datos) {
+    public DatosSueño updateDataSueno(@PathVariable Long id, @RequestBody DatosSueño datos) {
         datos.setId(id); // Marcamos el ID para actualizar
-        return datosSueñoService.save(datos);
+        return datosSueñoService.GuardarRegistroDatoSueño(datos);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        datosSueñoService.deleteById(id);
+    public void deleteDaraSuenp(@PathVariable Long id) {
+        datosSueñoService.BorrarporID(id);
     }
 }
