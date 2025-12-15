@@ -1,17 +1,25 @@
 package SmartWeb.demo.model;
 
 import jakarta.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "datos_sueno")
-public class DatosSueño {
+public class DatosSueno {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private float duracionSueño;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime fechaHora;
+
+    private float duracionSueno;
 
     @ElementCollection
     private List<Float> temperatura;
@@ -22,11 +30,17 @@ public class DatosSueño {
     @ElementCollection
     private List<Float> oxigenacion;
 
-    public DatosSueño() {}
 
-    public DatosSueño(Long id, float duracionSueño, List<Float> temperatura, List<Float> ruido, List<Float> oxigenacion) {
+    public DatosSueno() {
+        this.temperatura = new ArrayList<>();
+        this.ruido = new ArrayList<>();
+        this.oxigenacion = new ArrayList<>();
+    }
+
+    public DatosSueno(Long id, LocalDateTime fechaHora, float duracionSueno, List<Float> temperatura, List<Float> ruido, List<Float> oxigenacion) {
         this.id = id;
-        this.duracionSueño = duracionSueño;
+        this.fechaHora = fechaHora;
+        this.duracionSueno = duracionSueno;
         this.temperatura = temperatura;
         this.ruido = ruido;
         this.oxigenacion = oxigenacion;
@@ -36,16 +50,24 @@ public class DatosSueño {
         return id;
     }
 
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(LocalDateTime fechaHora) {
+        this.fechaHora = fechaHora;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public float getDuracionSueño() {
-        return duracionSueño;
+    public float getDuracionSueno() {
+        return duracionSueno;
     }
 
-    public void setDuracionSueño(float duracionSueño) {
-        this.duracionSueño = duracionSueño;
+    public void setDuracionSueno(float duracionSueno) {
+        this.duracionSueno = duracionSueno;
     }
 
     public List<Float> getTemperatura() {
