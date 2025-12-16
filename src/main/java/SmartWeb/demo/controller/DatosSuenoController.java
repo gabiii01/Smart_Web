@@ -29,34 +29,13 @@ public class DatosSuenoController {
         return datosSuenoService.EncontrarporID(id).orElse(null);
     }
 
-    // CODIGO ESPERADO EN EL DISPOSITIVO REAL DONDE EL DISPOSITIVO FACILITE LOS ARRAYS
-
-    /*@PostMapping
+    @PostMapping
     public DatosSueno crearDataSueno(@RequestBody DatosSueno datos) {
         return datosSuenoService.GuardarRegistroDatoSueno(datos);
     }
-     */
-    //
 
-    @PostMapping("/nuevo")
-    public String crearDataSuenoSimulado(@ModelAttribute DatosSueno datoSueno) {
 
-        // Asegurarse de que las listas no sean null
-        if (datoSueno.getTemperatura() == null) datoSueno.setTemperatura(new ArrayList<>());
-        if (datoSueno.getRuido() == null) datoSueno.setRuido(new ArrayList<>());
-        if (datoSueno.getOxigenacion() == null) datoSueno.setOxigenacion(new ArrayList<>());
 
-        // Generar 80 mediciones simuladas
-        for (int i = 0; i < 80; i++) {
-            datoSueno.getTemperatura().add(18 + (float)(Math.random() * 5));
-            datoSueno.getRuido().add((float)(Math.random() * 50));
-        }
-
-        // Guardar en la BD
-        datosSuenoService.GuardarRegistroDatoSueno(datoSueno);
-
-        return "redirect:/datos";
-    }
     @PutMapping("/{id}")
     public DatosSueno updateDataSueno(@PathVariable Long id, @RequestBody DatosSueno datos) {
         datos.setId(id); // Marcamos el ID para actualizar

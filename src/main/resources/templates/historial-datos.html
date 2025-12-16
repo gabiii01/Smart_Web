@@ -5,7 +5,7 @@
     <title>Historial de Sueño</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        table { width: 80%; border-collapse: collapse; margin-top: 20px; }
+        table { width: 90%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #f2f2f2; }
     </style>
@@ -23,6 +23,7 @@
         <th>Duración Sueño (h)</th>
         <th>Temperatura (°C)</th>
         <th>Nivel Ruido</th>
+        <th>Nivel de Oxigenacion</th>
     </tr>
     </thead>
     <tbody>
@@ -31,10 +32,11 @@
         <td th:text="${dato.fechaHora}"></td>
         <td th:text="${dato.duracionSueno}"></td>
         <td th:text="${dato.temperatura}"></td>
-        <td th:text="${dato.nivelRuido}"></td>
+        <td th:text="${dato.ruido}"></td>
+        <td th:text="${dato.oxigenacion}"></td>
     </tr>
     <tr th:if="${#lists.isEmpty(datos)}">
-        <td colspan="5">No hay registros de sueño en la base de datos.</td>
+        <td colspan="6">No hay registros de sueño en la base de datos.</td>
     </tr>
     </tbody>
 </table>

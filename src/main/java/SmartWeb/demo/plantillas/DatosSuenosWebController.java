@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/datos")
 
@@ -28,7 +31,7 @@ public class DatosSuenosWebController {
     public String listarDatosSueno(Model model) {
 
         var historial = datosSuenoService.EncontrarDatoSueno();
-        model.addAttribute("historial", historial);
+        model.addAttribute("datos", historial);
         return "historial-datos";
     }
 
@@ -39,11 +42,37 @@ public class DatosSuenosWebController {
         return "formulario-datos";
     }
 
-
     @PostMapping("/nuevo")
     public RedirectView guardarDatosSueno(@ModelAttribute DatosSueno datoSueno) {
+
+        if (datoSueno.getTemperatura() == null || datoSueno.getTemperatura().isEmpty()) {
+            generarMedicionesSimuladas(datoSueno);
+        }
+
         datosSuenoService.GuardarRegistroDatoSueno(datoSueno);
         return new RedirectView("/datos");
     }
 
+    /*
+    REALIZAMOS UN METODO QUE GENERE MEDICIONES SIMULADAS
+     */
+    private void generarMedicionesSimuladas(DatosSueno datoSueno) {
+
+        List<Float> temperaturas = new ArrayList<>();
+        List<Float> ruidos = new ArrayList<>();
+        List<Float> oxigenaciones = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            temperaturas.add(18 + (float) (Math.random() * 5));
+            ruidos.add((float) (Math.random() * 50));
+            oxigenaciones.add(90 + (float) (Math.random() * 5));
+        }
+
+        datoSueno.setTemperatura(temperaturas);
+        datoSueno.setRuido(ruidos);
+        datoSueno.setOxigenacion(oxigenaciones);
+    }
+
+
 }
+

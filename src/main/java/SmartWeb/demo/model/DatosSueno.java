@@ -22,12 +22,28 @@ public class DatosSueno {
     private float duracionSueno;
 
     @ElementCollection
+    @CollectionTable(
+            name = "temperaturas_sueno",
+            joinColumns = @JoinColumn(name = "datos_sueno_id")
+    )
+    @Column(name = "valor")
     private List<Float> temperatura;
 
+
     @ElementCollection
+    @CollectionTable(
+            name = "ruido_sueno",
+            joinColumns = @JoinColumn(name = "datos_sueno_id")
+    )
+    @Column(name = "valor")
     private List<Float> ruido;
 
     @ElementCollection
+    @CollectionTable(
+            name = "oxigenacion_sueno",
+            joinColumns = @JoinColumn(name = "datos_sueno_id")
+    )
+    @Column(name = "valor")
     private List<Float> oxigenacion;
 
 
