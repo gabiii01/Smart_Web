@@ -35,4 +35,16 @@ public class DatosSuenoService {
     public void BorrarporID(Long id) {
         datosSuenoRepositorio.deleteById(id);
     }
+    public double calcularMediaTemperatura(DatosSueno dato) {
+
+    if (dato.getTemperatura() == null || dato.getTemperatura().isEmpty()) {
+        return 0.0;
+    }
+
+    return dato.getTemperatura().stream()
+            .mapToDouble(Float::doubleValue)
+            .average()
+            .orElse(0.0);
+}
+    
 }

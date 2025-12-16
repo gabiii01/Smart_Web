@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 @Controller
 @RequestMapping("/datos")
@@ -27,13 +30,25 @@ public class DatosSuenosWebController {
         this.datosSuenoService = datosSuenoService;
     }
 
-    @GetMapping
-    public String listarDatosSueno(Model model) {
+  @GetMapping
+public String listarDatosSueno(Model model) {
 
-        var historial = datosSuenoService.EncontrarDatoSueno();
-        model.addAttribute("datos", historial);
-        return "historial-datos";
+    var historial = datosSuenoService.EncontrarDatoSueno();
+
+    Map<Long, Double> mediasTemperatura = new HashMap<>();
+
+    for (DatosSueno dato : historial) {
+        mediasTemperatura.put(
+                dato.getId(),
+                datosSuenoService.calcularMediaTemperatura(dato)
+        );
     }
+
+    model.addAttribute("historial", historial);
+    model.addAttribute("mediasTemperatura", mediasTemperatura);
+
+    return "historial-datos";
+}
 
     @GetMapping("/nuevo")
     public String mostrarFormularioCreacion(Model model) {

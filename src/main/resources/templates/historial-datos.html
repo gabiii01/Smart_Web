@@ -22,8 +22,11 @@
         <th>Fecha y Hora</th>
         <th>Duración Sueño (h)</th>
         <th>Temperatura (°C)</th>
+        <th>Media Temperatura</th>
+
         <th>Nivel Ruido</th>
         <th>Nivel de Oxigenacion</th>
+        
     </tr>
     </thead>
     <tbody>
@@ -32,6 +35,8 @@
         <td th:text="${dato.fechaHora}"></td>
         <td th:text="${dato.duracionSueno}"></td>
         <td th:text="${dato.temperatura}"></td>
+        <tr th:each="dato : ${historial}">
+
         <td th:text="${dato.ruido}"></td>
         <td th:text="${dato.oxigenacion}"></td>
     </tr>
