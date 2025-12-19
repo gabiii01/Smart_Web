@@ -34,13 +34,33 @@ public class DatosSuenoTest {
     }
 
     @Test
-    void testInicializacionListas() {
+
+    void testConstructorCompleto() {
+        Long id = 1L;
+        LocalDateTime fecha = LocalDateTime.now();
+        float duracion = 8.0f;
+        List<Float> temp = Arrays.asList(36.0f);
+        List<Float> ruido = Arrays.asList(10.0f);
+        List<Float> oxigeno = Arrays.asList(98.0f);
+
+        DatosSueno ds = new DatosSueno(id, fecha, duracion, temp, ruido, oxigeno);
+        assertEquals(id, ds.getId());
+        assertEquals(fecha, ds.getFechaHora());
+        assertEquals(duracion, ds.getDuracionSueno());
+    }
+    @Test
+    void testInicializacion() {
         DatosSueno dato = new DatosSueno();
+
+        dato.setId(1L);
+        dato.setDuracionSueno(8.0f);
 
         dato.setRuido(new ArrayList<>());
         dato.setOxigenacion(new ArrayList<>());
         dato.setTemperatura(new ArrayList<>());
 
+        assertNotNull(dato.getId());
+        assertEquals(8.0f, dato.getDuracionSueno());
         assertNotNull(dato.getRuido());
         assertTrue(dato.getRuido().isEmpty());
         assertNotNull(dato.getOxigenacion());

@@ -11,15 +11,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -69,5 +70,19 @@ public class DatoSuenoServiceTest {
         DatosSueno resultado = datosSuenoService.GuardarRegistroDatoSueno(datosPrueba);
         assertNotNull(resultado);
         verify(datosSuenoRepositorio, times(1)).save(datosPrueba);
+    }
+
+    @Test
+    @DisplayName("Prueba buscar por ID")
+    void testBuscarPorId() {
+        // Arrange
+        DatosSueno ds = new DatosSueno();
+        when(datosSuenoRepositorio.findById(1L)).thenReturn(Optional.of(ds));
+
+        // Act
+        Optional<DatosSueno> resultado = datosSuenoService.EncontrarporID(1L);
+
+        // Assert
+        assertTrue(resultado.isPresent());
     }
 }
